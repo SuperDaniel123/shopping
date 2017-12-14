@@ -6,6 +6,9 @@ import App from './App'
 import router from './router'
 import fastclick from 'fastclick'
 import './common/fonts/font-awesome/css/font-awesome.min.css'
+//loading组件激活
+import  { LoadingPlugin } from 'vux'
+Vue.use(LoadingPlugin)
 
 fastclick.attach(document.body)
 

@@ -4,7 +4,7 @@
         <div class="pro_header">
             <i class="fa fa-angle-left fa-2x black" @click="getBack"></i>
             <!--头部选项组件-->
-            <pro-tab></pro-tab>
+            <pro-tab @tabChildNode="showNode"></pro-tab>
 
             <i class="fa fa-ellipsis-v fa-lg more" @click="getShow"></i>
             <ul class="moreList" v-if="more">
@@ -18,8 +18,16 @@
         </div>
         <!--页面切换组件-->
         <div class="por-slider">
-            <keep-alive>
-                <router-view></router-view>
+            <keep-alive v-if="showChild === 0">
+                <commodity></commodity>
+            </keep-alive>
+
+            <keep-alive v-if="showChild === 1">
+                <pro-details></pro-details>
+            </keep-alive>
+
+            <keep-alive v-if="showChild === 2">
+                <evaluate></evaluate>
             </keep-alive>
         </div>
 
@@ -36,21 +44,32 @@
 
 <script>
 // import { Tab, TabItem,Swiper, SwiperItem } from 'vux';
-import proTab from "./pro-tab/pro-tab"
+import proTab from "@/components/productDetails/pro-tab/pro-tab"
+import Commodity from '@/components/productDetails/commodity/commodity'
+import ProDetails from '@/components/productDetails/pro-details/pro-details'
+import Evaluate from '@/components/productDetails/evaluate/evaluate'
 export default {
+    
     components: {
-        proTab
+        proTab,
+        Commodity,
+        ProDetails,
+        Evaluate
     },
+    // created(){
+
+    // },
     data(){
         return{
             more:false,   //右侧开关
+            showChild:0
         }
         
     },
     methods:{
         //返回上一页
         getBack(){
-            window.history.go(-1);
+            this.$router.goBack()
         },
         getShow(){
             if(!this.more){
@@ -58,6 +77,9 @@ export default {
             }else{
                 this.more = false
             }
+        },
+        showNode(data){
+            this.showChild = data;
         }
     }
 }
@@ -69,7 +91,7 @@ export default {
 @import '../../common/css/pro-view.less';
 
 .por-slider{
-    margin-top:3rem
+    margin:3rem 0 3.5rem 0;
 }
 
 </style>
