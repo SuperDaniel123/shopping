@@ -10,7 +10,7 @@
             <ul class="moreList" v-if="more">
                 <li><i class="fa fa-home fa-lg"></i><span>Home</span></li>
                 <li><i class="fa fa-search fa-lg"></i><span>Search</span></li>
-                <li><i class="fa fa-cart-arrow-down fa-lg"></i><span>Cart</span></li>
+                <li><i class="fa ffa-shopping-cart fa-lg"></i><span>Cart</span></li>
                 <li><i class="fa fa-user fa-lg"></i><span>My account</span></li>
                 <li><i class="fa fa-commenting fa-lg"></i><span>Message</span></li>
             </ul>

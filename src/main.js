@@ -6,6 +6,10 @@ import App from './App'
 import router from './router'
 import fastclick from 'fastclick'
 import './common/fonts/font-awesome/css/font-awesome.min.css'
+import axios from 'axios'
+axios.defaults.baseURL='/api';
+Vue.prototype.$http = axios;
+Vue.use(axios);
 //loading组件激活
 import  { LoadingPlugin } from 'vux'
 Vue.use(LoadingPlugin)
