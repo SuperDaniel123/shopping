@@ -7,25 +7,12 @@
             <i class="fa fa-globe"></i>
           </div>
       </div>
-      <swiper loop auto :list="demo06_list"></swiper>
+      
   </div>
 </template>
 
 <script>
-import { Swiper, SwiperItem } from 'vux'
-const baseList = [{
-  url: 'javascript:',
-  img: 'https://static.vux.li/demo/1.jpg',
-  title: '送你一朵fua'
-}, {
-  url: 'javascript:',
-  img: 'https://static.vux.li/demo/2.jpg',
-  title: '送你一辆车'
-}, {
-  url: 'javascript:',
-  img: 'https://static.vux.li/demo/3.jpg',
-  title: '送你一次旅行'
-}]
+
 
 // const urlList = baseList.map((item, index) => ({
 //   url: 'http://m.baidu.com',
@@ -34,20 +21,6 @@ const baseList = [{
 //   title: `(可点击)${item.title}`
 // }))
 export default{
-    components:{
-        Swiper, 
-        SwiperItem
-    },
-    data(){
-        return{
-            demo06_list: baseList
-        }
-    },
-    methods:{
-        demo06_onIndexChange(){
-            
-        }
-    }
 }
 </script>
 
