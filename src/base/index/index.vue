@@ -46,14 +46,34 @@
 
                 <div class="column">
                     <img class="title" :src="columnTitle[2].itemData[0].imageUrl" />
-                    <div class="focusPic"><img :src="this.column5.itemData[0].imageUrl" /></div>
+                    <div class="focusPic">
+                        <router-link to="/proview">
+                            <img :src="this.column5.itemData[0].imageUrl" />
+                        </router-link>
+                    </div>
                     <ul class="layout4">
-                        
+                        <li v-for="item in column6.itemData" :key="item.index">
+                            <router-link to="/proview">
+                                <img :src="item.imageUrl" />
+                            </router-link>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="column">
+                    <img class="title" :src="columnTitle[3].itemData[0].imageUrl" />
+                    <ul class="layout5">
+                        <li v-for="item in column7.itemData" :key="item.index">
+                            <spinner type="bubbles" class="loadding"></spinner>
+                            <!-- <span class="loadding">login</span> -->
+                            <x-img :src="item.imageUrl" @on-success="success" @on-error="error" class="ximg-demo" error-class="ximg-error" :offset="-100" container="#vux_view_box_body"/>
+                            <p v-text="item.goodsName"></p>
+                            <span><i class="fa fa-usd"></i>{{item.goodsPrice}}</span>
+                        </li>
                     </ul>
                 </div>
             </div>
         </div>
-        <router-link to="/proview">proview</router-link>
         <i-footer></i-footer>
   </div>
 </template>
@@ -61,19 +81,26 @@
 <script>
     import iHeader from '@/components/header/i-header'
     import iFooter from '@/components/footer/i-footer'
-    import { Swiper, SwiperItem } from 'vux'
+    import { Swiper, SwiperItem, XImg, Spinner } from 'vux'
     export default{
         components:{
             iHeader,
             iFooter,
             Swiper, 
-            SwiperItem
+            SwiperItem,
+            XImg,
+            Spinner
         },
         data(){
             return{
                 dataTeam:{},           //首页所有数据对象
                 bannerImg:{},          //banner
                 columnTitle:[           //分类标题
+                    {
+                        itemData:[
+                            {imageUrl:''}
+                        ]
+                    },
                     {
                         itemData:[
                             {imageUrl:''}
@@ -100,7 +127,10 @@
                             imageUrl:''
                         }
                     ]
-                }              //单列单张大图模块
+                },              //单列单张大图模块
+                column6:{},              //双列多行图片模块
+                column7:{}              //双列多行商品模块
+
 
             }
         },
@@ -117,13 +147,15 @@
                     this.getObj()
                     this.bannerImg = this.dataTeam[0];          //banner
                     let title = [];
-                    title.push(this.dataTeam[1],this.dataTeam[5],this.dataTeam[7])
+                    title.push(this.dataTeam[1],this.dataTeam[5],this.dataTeam[7],this.dataTeam[10])
                     this.columnTitle = title
                     this.column1 = this.dataTeam[2]
                     this.column2 = this.dataTeam[3]
                     this.column3 = this.dataTeam[4]
                     this.column4 = this.dataTeam[6]
                     this.column5 = this.dataTeam[8]
+                    this.column6 = this.dataTeam[9]
+                    this.column7 = this.dataTeam[11]
                     console.log(this.dataTeam)
                 })
                 .catch(error=>{
@@ -138,12 +170,29 @@
                     let pase = JSON.parse(str);
                     arr[i].itemData = pase;
                 }
+            },
+            success (src, ele) {
+                const span = ele.parentNode.querySelector('.loadding')
+                ele.parentNode.removeChild(span)
+            },
+            error (src, ele, msg) {
+                const span = ele.parentNode.querySelector('.loadding')
+                span.innerText = 'load error'
             }
         }
     }
 </script>
 
 <style lang="less" scoped>
+.vux-spinner{
+    position: absolute;
+    top:50%;
+    left: 50%;
+    margin-left:-14px;
+    margin-top:-2rem;
+
+    
+}
 .content{
     width:100%;
     margin:3rem auto 3.5rem;
@@ -204,7 +253,45 @@
             }
         }
         .layout4{
-            
+            display: flex;
+            flex-wrap:wrap;
+            border-bottom: #eee 1px solid;
+            li{
+                width:50%;
+                img{
+                    width:100%;
+                }
+            }
+        }
+        .layout5{
+            display:flex;
+            flex-wrap:wrap;
+            li{
+                width:50%;
+                box-sizing: border-box;
+                overflow: hidden;
+                position: relative;
+                img{
+                    width:100%;
+                }
+                p{
+                    color:#999;
+                    max-height:2.4rem;
+                    display: -webkit-box;
+                    -webkit-box-orient: vertical;
+                    -webkit-line-clamp: 2;
+                    overflow: hidden;
+                }
+                span{
+                    color:red
+                }
+            }
+            li:nth-of-type(odd){
+                padding:0.5rem 0.5rem 0.5rem 1rem;
+            }
+            li:nth-of-type(even){
+                padding:0.5rem 1rem 0.5rem 0.5rem;
+            }
         }
     }
 }
