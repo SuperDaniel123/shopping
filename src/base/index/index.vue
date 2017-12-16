@@ -12,7 +12,21 @@
                     <img class="title" :src="columnTitle[0].itemData[0].imageUrl" />
                     <ul class="layout1 clearfix">
                         <li v-for="item in column1.itemData" :key="item.index">
-                            <router-link to="/">
+                            <router-link to="/proview">
+                                <img :src="item.imageUrl" />
+                            </router-link>
+                        </li>
+                    </ul>
+                    <ul class="layout2">
+                        <li v-for="item in column2.itemData" :key="item.index">
+                            <router-link to="/proview">
+                                <img :src="item.imageUrl" />
+                            </router-link>
+                        </li>
+                    </ul>
+                    <ul class="layout1 clearfix">
+                        <li v-for="item in column3.itemData" :key="item.index">
+                            <router-link to="/proview">
                                 <img :src="item.imageUrl" />
                             </router-link>
                         </li>
@@ -21,10 +35,21 @@
 
                 <div class="column" >
                     <img class="title" :src="columnTitle[1].itemData[0].imageUrl" />
+                    <ul class="layout2 layout3">
+                        <li v-for="item in column4.itemData" :key="item.index">
+                            <router-link to="/proview">
+                                <img :src="item.imageUrl" />
+                            </router-link>
+                        </li>
+                    </ul>
                 </div>
 
                 <div class="column">
                     <img class="title" :src="columnTitle[2].itemData[0].imageUrl" />
+                    <div class="focusPic"><img :src="this.column5.itemData[0].imageUrl" /></div>
+                    <ul class="layout4">
+                        
+                    </ul>
                 </div>
             </div>
         </div>
@@ -65,7 +90,17 @@
                         ]
                     }
                 ],
-                column1:{}        
+                column1:{},             //左一右二图片模块
+                column2:{},             //四列单行小图模块
+                column3:{},             //左一右二图片模块
+                column4:{},             //三列单行图片模块
+                column5:{
+                    itemData:[
+                        {
+                            imageUrl:''
+                        }
+                    ]
+                }              //单列单张大图模块
 
             }
         },
@@ -85,7 +120,11 @@
                     title.push(this.dataTeam[1],this.dataTeam[5],this.dataTeam[7])
                     this.columnTitle = title
                     this.column1 = this.dataTeam[2]
-                    console.log(this.column1)
+                    this.column2 = this.dataTeam[3]
+                    this.column3 = this.dataTeam[4]
+                    this.column4 = this.dataTeam[6]
+                    this.column5 = this.dataTeam[8]
+                    console.log(this.dataTeam)
                 })
                 .catch(error=>{
                     alert(error)
@@ -115,6 +154,11 @@
             vertical-align: middle;
             border-bottom: 1px solid #eee;
         }
+        .focusPic{
+            img{
+                width:100%;
+            }
+        }
         .layout1{
             height:18.8rem;
             li{
@@ -137,6 +181,30 @@
                 border-right: 1px solid #eee;
             }
     
+        }
+        .layout2{
+            display: flex;
+            border-bottom: 1px #eee solid;
+            li{
+                flex:1;
+                border-right:1px #eee solid;
+                img{
+                    width:100%;
+                    vertical-align: middle;
+                    object-fit: cover;
+                }
+            }
+        }
+        .layout3{
+            li{
+                padding:1rem 0;
+            }
+            li:nth-last-child(1){
+                border-right: none;
+            }
+        }
+        .layout4{
+            
         }
     }
 }
