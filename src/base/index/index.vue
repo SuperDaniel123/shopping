@@ -93,7 +93,7 @@
         },
         data(){
             return{
-                dataTeam:{},           //首页所有数据对象
+                dataTeam:'',           //首页所有数据对象
                 bannerImg:{},          //banner
                 columnTitle:[           //分类标题
                     {
@@ -156,7 +156,6 @@
                     this.column5 = this.dataTeam[8]
                     this.column6 = this.dataTeam[9]
                     this.column7 = this.dataTeam[11]
-                    console.log(this.dataTeam)
                 })
                 .catch(error=>{
                     alert(error)
@@ -178,8 +177,10 @@
             error (src, ele, msg) {
                 const span = ele.parentNode.querySelector('.loadding')
                 span.innerText = 'load error'
-            }
+            },
+            
         }
+        
     }
 </script>
 

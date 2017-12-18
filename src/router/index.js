@@ -8,7 +8,7 @@ import proview from '@/base/proview/por-view'
 import index from '@/base/index/index'
 import afterSale from '@/base/afterSale/afterSale'
 import login from '@/base/login/login'
-
+import brandList from '@/base/brandList/brandList'
 Vue.use(Router)
 
 Router.prototype.goBack = function () {
@@ -32,7 +32,6 @@ export default new Router({
           name: 'afterSale',
           component: afterSale
         },
-
         //产品详情
         {
           path: '/proview',
@@ -58,8 +57,14 @@ export default new Router({
           path:'/login',
           name:'login',
           component:login
+        },
+        
+        //品牌列表
+        {
+          path: '/brandList',
+          name: 'brandList',
+          component: brandList
         }
-
 
 
       ]

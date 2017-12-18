@@ -1,7 +1,7 @@
 <template>
   <div class="ifooter">
     <router-link to="/"><div class="child"><i class="fa fa-home fa-lg"></i><span>Home</span></div></router-link>
-    <router-link to="/"><div class="child"><i class="fa fa-list-ul fa-lg"></i><span>Category</span></div></router-link>
+    <router-link to="/brandList"><div class="child"><i class="fa fa-list-ul fa-lg"></i><span>Category</span></div></router-link>
     <router-link to="/"><div class="child"><i class="fa fa-shopping-cart fa-lg"></i><span>Cart</span></div></router-link>
     <router-link to="/"><div class="child"><i class="fa fa-user fa-lg"></i><span>Me</span></div></router-link>
   </div>
