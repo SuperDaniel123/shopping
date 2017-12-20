@@ -6,6 +6,7 @@
       </div>
       
   </div>
+  
 </template>
 
 <script>
@@ -18,6 +19,7 @@
 //   title: `(可点击)${item.title}`
 // }))
 export default{
+    
     methods:{
         getBack(){
             this.$router.goBack()
