@@ -1,8 +1,9 @@
 <template>
   <div >
       <div class="header">
-          <i class="fa fa-angle-left fa-2x black" @click="getBack"></i>
+          <!-- <i class="fa fa-angle-left fa-2x black" @click="getBack"></i> -->
           <input type="text" class="search" placeholder="search" />
+          <i class="fa fa-commenting-o"></i>
       </div>
       
   </div>
@@ -21,9 +22,7 @@
 export default{
     
     methods:{
-        getBack(){
-            this.$router.goBack()
-        }
+
     }
 }
 </script>
@@ -44,17 +43,18 @@ export default{
         color:#888;
         font-family: Arial, Helvetica, sans-serif;
         position: absolute;
-        left: 50%;
-        margin-left:-40%;
+        left: 2rem;
         top:0.4rem;
         border-radius: 2.2rem;
     }
-    .black{
+    .fa-commenting-o{
         position: absolute;
         top:0;
-        left:0;
+        font-size:2rem;
+        right:0;
         width:3rem;
         height: 3rem;
+        color:#fff;
         line-height: 3rem;
         text-align: center;
     }

@@ -80,6 +80,7 @@
 <script>
 import iHeader from '@/components/header/i-header'
 import { Swiper, SwiperItem, XImg, Spinner } from 'vux'
+import {getObj} from '@/common/js/getObj.js'
     export default{
         components:{
             iHeader,
@@ -141,7 +142,7 @@ import { Swiper, SwiperItem, XImg, Spinner } from 'vux'
                         console.log('error')
                     }
                     this.dataTeam = res.data.datas.itemList;
-                    this.getObj()
+                    getObj(this.dataTeam,'itemData')
                     this.bannerImg = this.dataTeam[0];          //banner
                     let title = [];
                     title.push(this.dataTeam[1],this.dataTeam[5],this.dataTeam[7],this.dataTeam[10])
@@ -157,15 +158,6 @@ import { Swiper, SwiperItem, XImg, Spinner } from 'vux'
                 .catch(error=>{
                     alert(error)
                 }) 
-            },
-            //把itemData字符串转换成obj
-            getObj(){
-                let arr = this.dataTeam;
-                for(let i = 0; i <arr.length; i++){
-                    let str = arr[i].itemData;
-                    let pase = JSON.parse(str);
-                    arr[i].itemData = pase;
-                }
             },
             success (src, ele) {
                 const span = ele.parentNode.querySelector('.loadding')
