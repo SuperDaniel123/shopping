@@ -24,6 +24,7 @@
 <script>
 import {Group,XInput,Checker,CheckerItem} from 'vux'
 import comHeader from '../../components/header/com-header'
+import {pageHeight} from '@/common/js/getObj.js'
 export default {
   components:{
       Group,
@@ -31,6 +32,9 @@ export default {
       comHeader,
       Checker,
       CheckerItem
+  },
+  mounted () {
+      pageHeight(".loginFrom")
   },
   data(){
       return{
@@ -42,7 +46,6 @@ export default {
             disable:true
           }
           
-
       }
   },
   watch:{
@@ -68,7 +71,8 @@ export default {
 <style lang="less" scoped>
     
     .loginFrom{
-        margin-top:3rem;
+        padding-top:3rem;
+        box-sizing: border-box;
         
         .codeBtn{
             width:80%;

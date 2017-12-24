@@ -7,7 +7,11 @@
 </template>
 
 <script>
+import { pageHeight } from "@/common/js/getObj.js"
   export default {
+    mounted () {
+      pageHeight('.child-view')
+    },
     data () {
       return {
         transitionName: 'slide-left'
@@ -22,7 +26,7 @@
       }
       this.$router.isBack = false
       next()
-    }
+    },
   }
 </script>
 

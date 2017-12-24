@@ -16,7 +16,7 @@
 
 <script>
 import searchHeader from '@/components/header/search-header'
-import {getObj} from '@/common/js/getObj.js'
+import {getObj,pageHeight} from '@/common/js/getObj.js'
 export default {
   components: {
       searchHeader
@@ -25,7 +25,7 @@ export default {
     this.getLeftNav()
   },
   mounted() {
-    this.pageHeight()
+    pageHeight('.content')
   },
   data(){
     return{
@@ -35,12 +35,6 @@ export default {
     }
   },
   methods: {
-    //获取页面高度
-    pageHeight(){
-      let inHeight = window.screen.height
-      let content = document.querySelector('.content')
-      content.style.height = inHeight + 'px'
-    },
     //获取左栏数据
     getLeftNav(){
       this.$http.get('/api/search/menunew').then(res=>{
@@ -78,7 +72,7 @@ export default {
   float: left;
   background: #eee;
   width:8rem;
-  height:100%;
+  max-height:100%;
   overflow-x: hidden;
   overflow-y: auto;
   li{

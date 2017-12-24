@@ -9,6 +9,14 @@ function getObj(obj,sub){
     }
 }
 
+//获取页面高度
+function pageHeight(dom){
+    let inHeight = window.screen.height
+    let content = document.querySelector(dom)
+    content.style.minHeight = inHeight + 'px'
+}
+
 export {  //暴露出去
-    getObj
+    getObj,
+    pageHeight
 }
