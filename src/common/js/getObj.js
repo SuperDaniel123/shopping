@@ -5,7 +5,6 @@ function getObj(obj,sub){
       let str = arr[i][sub];
       let pase = JSON.parse(str);
       arr[i][sub] = pase;
-
     }
 }
 
