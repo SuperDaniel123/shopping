@@ -8,6 +8,7 @@ import proview from '@/base/proview/por-view'
 import index from '@/base/index/index'
 import afterSale from '@/base/afterSale/afterSale'
 import login from '@/base/login/login'
+import store from '@/base/store/store'
 Vue.use(Router)
 
 Router.prototype.goBack = function () {
@@ -57,6 +58,11 @@ export default new Router({
           name:'login',
           component:login
         },
+        {
+          path:'/store',
+          name:'store',
+          component:store
+        }
 
 
       ]
