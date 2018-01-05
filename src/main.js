@@ -7,6 +7,7 @@ import router from './router'
 import fastclick from 'fastclick'
 import './common/fonts/font-awesome/css/font-awesome.min.css'
 import axios from 'axios'
+import store from './store'
 axios.defaults.baseURL='/';
 Vue.prototype.$http = axios;
 Vue.use(axios);
@@ -23,6 +24,7 @@ Vue.config.productionTip = false
 new Vue({
   el: '#app',
   router,
+  store,
   template: '<App/>',
   components: { App }
 })

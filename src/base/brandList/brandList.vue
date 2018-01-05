@@ -32,6 +32,7 @@
 <script>
 import searchHeader from '@/components/header/search-header'
 import {getObj} from '@/common/js/getObj.js'
+import {mapMutations} from 'vuex'
 export default {
   components: {
       searchHeader
@@ -61,11 +62,12 @@ export default {
 
     //判断跳转
     goShop(type,parameter){
-      console.log(type+'          '+parameter)
+      // console.log(type+'          '+parameter)
       switch(type){
         //店铺
         case "store" : 
-          alert(parameter);
+          this.setStore(parameter)
+          this.$router.push({path:'/store'})
           break;
         //分类搜索
         case "category" :
@@ -116,8 +118,12 @@ export default {
         count.subitemData = pase;
         count.itemData = lineName;
       }
-    }
-  }
+    },
+    ...mapMutations({
+      setStore: 'SET_STORE'
+    })
+  },
+
 }
 </script>
 
