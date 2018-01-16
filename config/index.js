@@ -12,7 +12,7 @@ module.exports = {
     assetsPublicPath: '/',
     proxyTable: {
       '/api':{
-        target:'https://e.zegobird.com/api',
+        target:'https://www.zegobird.com/api',
         changeOrigin: true,
         pathRewrite:{
           '^/api':'/'

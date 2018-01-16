@@ -59,7 +59,7 @@ export default new Router({
           component:login
         },
         {
-          path:'/store:storeId',
+          path:'/store/:storeId',
           name:'store',
           component:store
         }
