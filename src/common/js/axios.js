@@ -10,7 +10,6 @@ axios.interceptors.response.use(
         return Promise.reject(response);
     }
 )
-
 let api = function(url,type,options){
     url = "api" + url
     let opt = options || {};

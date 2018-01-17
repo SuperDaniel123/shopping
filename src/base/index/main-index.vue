@@ -65,7 +65,6 @@
                     <ul class="layout5">
                         <li v-for="item in column7.itemData" :key="item.index">
                             <spinner type="bubbles" class="loadding"></spinner>
-                            <!-- <span class="loadding">login</span> -->
                             <x-img :src="item.imageUrl" @on-success="success" @on-error="error" class="ximg-demo" error-class="ximg-error" :offset="-100" container="#vux_view_box_body"/>
                             <p v-text="item.goodsName"></p>
                             <span><i class="fa fa-usd"></i>{{item.goodsPrice}}</span>
