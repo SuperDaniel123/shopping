@@ -25,14 +25,45 @@
                     <tab-item selected>Top Liked</tab-item>
                     <tab-item>Top selling</tab-item>
                 </tab>
-                <swiper v-model="index" height="100px" :show-dots="false">
+                <swiper v-model="index" height="15rem" :show-dots="false">
                     <swiper-item>
-                        <div class="tab-swiper vux-center">1</div>
+                        <ul class="top-list">
+                            <li v-for="(item,index) in this.liked" :key="index">
+                                <a @click="goLink()">
+                                    <img :src="item.imageSrc" alt="" />
+                                    <div class="text">
+                                        <span class="ids">Orders:<em v-text="item.goodsSaleNum"></em></span>
+                                        <span class="pay">{{item.appPrice0}}</span>
+                                    </div>
+                                </a>
+                            </li>
+                        </ul>
                     </swiper-item>
                     <swiper-item>
-                        <div class="tab-swiper vux-center">2</div>
+                        <ul class="top-list">
+                            <li v-for="(item,index) in this.selling" :key="index">
+                                <a @click="goLink()">
+                                    <img :src="item.imageSrc" alt="" />
+                                    <div class="text">
+                                        <span class="ids">Orders:<em v-text="item.goodsSaleNum"></em></span>
+                                        <span class="pay">{{item.appPrice0}}</span>
+                                    </div>
+                                </a>
+                            </li>
+                        </ul>
                     </swiper-item>
                 </swiper>
+                <!--商品列表-->
+                <div class="goodslist">
+                    <h3>Seller Recommendation</h3>
+                    <ul class="goodsteam">
+                        <li v-for="(item,index) in this.goodsList" :key="index">
+                            <loader :src = "item.imageSrc + '@180w_180h'"></loader>
+                            <p v-text="item.goodsName"></p>
+                            <span v-text="item.appPrice0"></span>
+                        </li>
+                    </ul>
+                </div>
           </div>
           <div class="storeFooter">
               <div class="menu">Store Categories</div>
@@ -47,7 +78,8 @@
 import searchHeaderPro from "@/components/header/search-header-pro"
 import {pageHeight} from "@/common/js/getObj.js"
 // import {mapGetters} from 'vuex'
-import { Tab,TabItem,Swiper,SwiperItem,XImg } from 'vux'
+import { Tab,TabItem,Swiper,SwiperItem,XImg,Spinner } from 'vux'
+import loader from "@/components/imgLoad/loader"
 export default {
     components:{
         pageHeight,
@@ -56,7 +88,9 @@ export default {
         TabItem,
         Swiper,
         SwiperItem,
-        XImg
+        XImg,
+        Spinner,
+        loader
     },
     computed: {
         // ...mapGetters([
@@ -81,7 +115,13 @@ export default {
             //基本信息
             info:{},
             //推荐
-            index:0
+            index:0,
+            //top liked
+            liked:[],
+            //top selling
+            selling:[],
+            //商品列表
+            goodsList:[]
         }
     },
     methods:{
@@ -94,113 +134,33 @@ export default {
                 }
                 let data = res.data.datas;
                 this.info = data.storeInfo
-                // console.log(data)
+                this.liked = data.storeRankList.collectdesc;
+                this.selling = data.storeRankList.salenumdesc;
+                this.goodsList = data.recGoodsList;
+                // console.log(this.goodsList)
+                // console.log(this.selling)
             }).catch(error=>{
                 console.log(error)
             })
         },
         head_success (src, ele) {
-        const span = ele.parentNode.querySelector('.errImg')
-        ele.parentNode.removeChild(span)
+            const span = ele.parentNode.querySelector('.errImg')
+            ele.parentNode.removeChild(span)
         },
         head_error (src, ele, msg) {
-        const span = ele.parentNode.querySelector('.errImg')
-        span.innerText = 'load error'
+            const span = ele.parentNode.querySelector('.errImg')
+            span.innerText = 'load error'
+        },
+        goLink(){
+            this.$router.push({
+                path:'/proview'
+            })
         }
+        
     }
 }
 </script>
 
 <style lang='less' scoped>
-.storeContent{
-    padding: 3rem 0;
-    width:100%;
-    box-sizing: border-box;
-    .storeFooter{
-        position: fixed;
-        border-top:1px #eee solid;
-        width:100%;
-        bottom:0;
-        left: 0;
-        height: 3rem;
-        box-sizing: border-box;
-        background: #fff;
-        display: flex;
-        .menu{
-            flex:1;
-            text-align:center;
-            line-height: 3rem;
-            box-sizing: border-box;
-            border-right:1px solid #eee;
-        }
-        .menu:last-child{
-            border:none;
-        }
-    }
-    
-    .shop_info{
-        width:100%;
-        min-height: 10rem;
-        // overflow-x: hidden;
-        position:relative;
-        .banner{
-            width:100%;
-            vertical-align: middle;
-        }
-        .head_portrait{
-            position: absolute;
-            bottom:0.5rem;
-            left:0.5rem;
-            .errImg,.dh{
-                width:5rem;
-                height:5rem;
-                border-radius: 0.5rem;
-                margin-right:1rem;
-            }
-            span{
-                font-size:1.2rem;
-                color:#fff;
-                text-shadow:1px 1px 1px #000;
-            }
-
-        }
-        .collect{
-            display: flex;
-            width:8rem;
-            height:3.5rem;
-            position: absolute;
-            bottom: 1rem;
-            right:0rem;
-            div{
-                flex:1;
-                text-align: center;
-                color:#fff;
-            }
-            div:first-child{
-                line-height: 3.5rem;
-                background: #ed5564;
-            }
-            div:last-child{
-                background: #DB4453;
-                box-sizing: border-box;
-                height:100%;
-                padding:0.5rem 0;
-                span{
-                    display: inline-block;
-                    width:100%;
-                }
-            }
-            
-        }
-    }
-    .rec_box{
-        h1{
-            line-height: 3rem;
-            font-size:1.2rem;
-            text-indent: 1rem;
-            border-bottom: 1px solid #eee;
-        }
-        
-    }
-}
+    @import '../../common/css/store.less' ;
 </style>

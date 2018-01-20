@@ -1,0 +1,180 @@
+.storeContent{
+    padding: 3rem 0;
+    width:100%;
+    box-sizing: border-box;
+    .storeFooter{
+        position: fixed;
+        border-top:1px #eee solid;
+        width:100%;
+        bottom:0;
+        left: 0;
+        height: 3rem;
+        box-sizing: border-box;
+        background: #fff;
+        display: flex;
+        .menu{
+            flex:1;
+            text-align:center;
+            line-height: 3rem;
+            box-sizing: border-box;
+            border-right:1px solid #eee;
+        }
+        .menu:last-child{
+            border:none;
+        }
+    }
+    
+    .shop_info{
+        width:100%;
+        min-height: 10rem;
+        // overflow-x: hidden;
+        position:relative;
+        .banner{
+            width:100%;
+            vertical-align: middle;
+        }
+        .head_portrait{
+            position: absolute;
+            bottom:0.5rem;
+            left:0.5rem;
+            .errImg,.dh{
+                width:5rem;
+                height:5rem;
+                border-radius: 0.5rem;
+                margin-right:1rem;
+            }
+            span{
+                font-size:1.2rem;
+                color:#fff;
+                text-shadow:1px 1px 1px #000;
+            }
+
+        }
+        .collect{
+            display: flex;
+            width:8rem;
+            height:3.5rem;
+            position: absolute;
+            bottom: 1rem;
+            right:0rem;
+            div{
+                flex:1;
+                text-align: center;
+                color:#fff;
+            }
+            div:first-child{
+                line-height: 3.5rem;
+                background: #ed5564;
+            }
+            div:last-child{
+                background: #DB4453;
+                box-sizing: border-box;
+                height:100%;
+                padding:0.5rem 0;
+                span{
+                    display: inline-block;
+                    width:100%;
+                }
+            }
+            
+        }
+    }
+    .rec_box{
+        h1{
+            line-height: 3rem;
+            font-size:1.2rem;
+            text-indent: 1rem;
+            border-bottom: 1px solid #eee;
+        }
+        
+    }
+    .top-list{
+        width:100%;
+        margin-top:0.5rem;   
+        li:first-of-type{
+            height:15rem;
+            float: left;
+        }
+        li{
+            position: relative;
+            float: right;
+            width:50%;
+            height:7.5rem;
+            img{
+                width:100%;
+                height: 100%;
+                vertical-align: middle;
+                object-fit: cover;
+            }
+            .text{
+                position:absolute;
+                bottom:0;
+                width:100%;
+                left: 0;
+                line-height: 2rem;
+                height: 2rem;
+                background: rgba(0,0,0,0.5);
+                color:#fff;
+                span.ids{
+                    display: inline-block;
+                    max-width: 50%;
+                    text-indent: 1rem;
+                }
+                span.pay{
+                    position: absolute;
+                    right:0.5rem;
+                    padding-left: 0.8rem;
+                    background: url("../../common/image/mian_o.png") left center no-repeat;
+                    background-size:auto 1.2rem;
+                }
+            }
+            
+        }
+        
+    }
+    .top-list::after{
+        content: '';
+        display: block;
+        clear: both;
+        height: 0;
+        width:100%;
+        visibility: hidden;
+    }
+    .goodslist{
+        padding-top:0.5rem;
+        h3{
+            line-height: 2rem;
+            text-indent: 1rem;
+            font-size:1.2rem;
+            font-weight: 500;
+        }
+        .goodsteam{
+            display: flex;
+            flex-wrap: wrap;
+            li{
+                width:50%;
+                box-sizing: border-box;
+                padding:0.5rem;
+                overflow: hidden;
+                p{
+                    margin: 0.5rem 0 0.2rem 0;
+                    font-size:1rem;
+                    line-height: 1.4rem;
+                    display: -webkit-box;
+                    -webkit-box-orient: vertical;
+                    -webkit-line-clamp: 2;
+                    overflow: hidden;
+                }
+                span{
+                    padding-left: 0.8rem;
+                    background: url("../../common/image/mian_o.png") left center no-repeat;
+                    background-size:auto 1.2rem;
+                    font-size:1.3rem;
+                    font-weight: 500;
+                    color:orange;
+                }
+            }
+        }
+    }
+
+}
