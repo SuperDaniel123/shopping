@@ -24,19 +24,15 @@
                             </router-link>
                         </li>
                     </ul>
-                    <ul class="layout1 clearfix">
+                    <ul class="layout0 clearfix">
                         <li v-for="item in column3.itemData" :key="item.index">
                             <router-link to="/proview">
                                 <img :src="item.imageUrl" />
                             </router-link>
                         </li>
                     </ul>
-                </div>
-
-                <div class="column" >
-                    <img class="title" :src="columnTitle[1].itemData[0].imageUrl" />
-                    <ul class="layout2 layout3">
-                        <li v-for="item in column4.itemData" :key="item.index">
+                    <ul class="layout1 clearfix">
+                        <li v-for="item in column5.itemData" :key="item.index">
                             <router-link to="/proview">
                                 <img :src="item.imageUrl" />
                             </router-link>
@@ -45,14 +41,20 @@
                 </div>
 
                 <div class="column">
-                    <img class="title" :src="columnTitle[2].itemData[0].imageUrl" />
-                    <div class="focusPic">
-                        <router-link to="/proview">
-                            <img :src="this.column5.itemData[0].imageUrl" />
-                        </router-link>
-                    </div>
+                    <img class="title" :src="columnTitle[1].itemData[0].imageUrl" />
                     <ul class="layout4">
                         <li v-for="item in column6.itemData" :key="item.index">
+                            <router-link to="/proview">
+                                <img :src="item.imageUrl" />
+                            </router-link>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="column" >
+                    <img class="title" :src="columnTitle[2].itemData[0].imageUrl" />
+                    <ul class="layout2">
+                        <li v-for="item in column7.itemData" :key="item.index">
                             <router-link to="/proview">
                                 <img :src="item.imageUrl" />
                             </router-link>
@@ -63,7 +65,7 @@
                 <div class="column">
                     <img class="title" :src="columnTitle[3].itemData[0].imageUrl" />
                     <ul class="layout5">
-                        <li v-for="item in column7.itemData" :key="item.index">
+                        <li v-for="item in column8.itemData" :key="item.index">
                             <spinner type="bubbles" class="loadding"></spinner>
                             <x-img :src="item.imageUrl" @on-success="success" @on-error="error" class="ximg-demo" error-class="ximg-error" :offset="-100" container="#vux_view_box_body"/>
                             <p v-text="item.goodsName"></p>
@@ -118,21 +120,17 @@ import {getObj} from '@/common/js/getObj.js'
                 column2:{},             //四列单行小图模块
                 column3:{},             //左一右二图片模块
                 column4:{},             //三列单行图片模块
-                column5:{
-                    itemData:[
-                        {
-                            imageUrl:''
-                        }
-                    ]
-                },              //单列单张大图模块
-                column6:{},              //双列多行图片模块
-                column7:{}              //双列多行商品模块
+                column5:{},             //左一右二图片模块
+                column6:{},              //三行单行图片
+                column7:{},              //单列单张大图模块
+                column8:{}              //双列多行商品模块
 
 
             }
         },
         created () {
-            this.loading()
+            this.loading();
+            
         },
         methods: {
             loading(){
@@ -144,15 +142,17 @@ import {getObj} from '@/common/js/getObj.js'
                     getObj(this.dataTeam,'itemData')
                     this.bannerImg = this.dataTeam[0];          //banner
                     let title = [];
-                    title.push(this.dataTeam[1],this.dataTeam[5],this.dataTeam[7],this.dataTeam[10])
+                    title.push(this.dataTeam[1],this.dataTeam[6],this.dataTeam[8],this.dataTeam[10])
                     this.columnTitle = title
                     this.column1 = this.dataTeam[2]
                     this.column2 = this.dataTeam[3]
                     this.column3 = this.dataTeam[4]
                     this.column4 = this.dataTeam[6]
-                    this.column5 = this.dataTeam[8]
-                    this.column6 = this.dataTeam[9]
-                    this.column7 = this.dataTeam[11]
+                    this.column5 = this.dataTeam[5]
+                    this.column6 = this.dataTeam[7]
+                    this.column7 = this.dataTeam[9]
+                    this.column8 = this.dataTeam[11]
+                    console.log(this.dataTeam)
                 })
                 .catch(error=>{
                     alert(error)
@@ -204,7 +204,6 @@ import {getObj} from '@/common/js/getObj.js'
                 display: block;
                 width:50%;
                 height:50%;
-                padding:0.3rem;
                 box-sizing: border-box;
                 border-bottom: 1px solid #eee;
                 img{
@@ -217,6 +216,24 @@ import {getObj} from '@/common/js/getObj.js'
             li:nth-of-type(1){
                 height:100%;
                 border-right: 1px solid #eee;
+            }
+    
+        }
+        .layout0{
+            li{
+                float: left;
+                display: block;
+                width:50%;
+                height:50%;
+                // padding:0.3rem;
+                box-sizing: border-box;
+                border-bottom: 1px solid #eee;
+                img{
+                    width:100%;
+                    height:100%;
+                    vertical-align: middle;
+                    object-fit: cover;
+                }
             }
     
         }
@@ -246,7 +263,7 @@ import {getObj} from '@/common/js/getObj.js'
             flex-wrap:wrap;
             border-bottom: #eee 1px solid;
             li{
-                width:50%;
+                flex:1;
                 img{
                     width:100%;
                 }

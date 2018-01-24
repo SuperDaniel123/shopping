@@ -55,7 +55,7 @@ let api = function(url,type,options){
             })
             .catch(error => {
                 alert("loading failed")
-                location.replace(location.href)
+                document.location.reload()
             })
         }
         

@@ -9,6 +9,9 @@ import index from '@/base/index/index'
 import afterSale from '@/base/afterSale/afterSale'
 import login from '@/base/login/login'
 import store from '@/base/store/store'
+import storeIndex from '@/base/store/storeIndex'
+import info from '@/base/store/store_info'
+
 Vue.use(Router)
 
 Router.prototype.goBack = function () {
@@ -58,10 +61,30 @@ export default new Router({
           name:'login',
           component:login
         },
+        // {
+        //   path:'/member',
+        //   name:'member',
+        //   component:member,
+        //   children:[{
+        //     path:'index',
+        //     component:index
+        //   }]
+        // },
         {
           path:'/store/:storeId',
+          redirect:'/store/:storeId',
           name:'store',
-          component:store
+          component:store,
+          children:[
+            {
+              path: '', 
+              component:storeIndex 
+            },
+            {
+              path:'info',
+              component:info
+            }        
+          ]
         }
 
 
