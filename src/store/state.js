@@ -8,7 +8,9 @@ const state = {
     //关键搜索
     searchKeyword:{},
     //链接搜索
-    searchUrl:{}
+    searchUrl:{},
+    //店铺信息
+    storeInfo:{}
 }
 
 export default state

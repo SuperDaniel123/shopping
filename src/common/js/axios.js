@@ -11,6 +11,12 @@ axios.interceptors.response.use(
     }
 )
 let api = function(url,type,options){
+
+    /*  url       请求地址
+    *   type      请求类型
+    *   options   请求参数
+    *   instance  请求首选项
+    */
     url = "api" + url
     let opt = options || {};
     let instance = axios.create({
@@ -38,6 +44,7 @@ let api = function(url,type,options){
                 location.replace(document.referrer)
             })
         }else if(type === 'GET' || type === 'get'){
+            
             instance.get(url,qs.stringify(opt))
             // axios({
             //     method: type,
@@ -55,12 +62,15 @@ let api = function(url,type,options){
             })
             .catch(error => {
                 alert("loading failed")
-                document.location.reload()
+                // document.location.reload()
+                // return api(url,type,options)
             })
         }
         
     })
 }
+
+
 
 Vue.prototype.$ajax = api;
 Vue.use(axios);

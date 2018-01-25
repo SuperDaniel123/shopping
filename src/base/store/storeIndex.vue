@@ -6,11 +6,10 @@
           <div class="shop_info">
               <img class="banner" :src="this.info.storeBannerUrl" />
               <div class="head_portrait" >
-
                   <router-link :to='"/store/"+ this.$route.params.storeId + "/info"' >
                   <img class="errImg" src="../../common/image/err-img.png" />
                   <!--头像-->
-                  <x-img :src="this.info.storeLogoUrl + '@150w_150h'"  @on-success="head_success" @on-error="head_error" class="dh" error-class="ximg-error" container="#vux_view_box_body"></x-img>
+                  <x-img :src="this.info.storeAvatarUrl + '@150w_150h'"  @on-success="head_success" @on-error="head_error" class="dh" error-class="ximg-error" container="#vux_view_box_body"></x-img>
                   </router-link>
                   <span v-text="this.info.storeName"></span>
               </div>
@@ -83,6 +82,7 @@
 import searchHeaderPro from "@/components/header/search-header-pro"
 import {pageHeight} from "@/common/js/getObj.js"
 // import {mapGetters} from 'vuex'
+import {mapMutations} from 'vuex'
 import { Tab,TabItem,Swiper,SwiperItem,XImg,Spinner } from 'vux'
 import loader from "@/components/imgLoad/loader"
 
@@ -140,6 +140,7 @@ export default {
                 }
                 let data = res.data.datas;
                 this.info = data.storeInfo
+                this.$store.commit('STORE_INFO',this.info)
                 this.liked = data.storeRankList.collectdesc;
                 this.selling = data.storeRankList.salenumdesc;
                 this.goodsList = data.recGoodsList;

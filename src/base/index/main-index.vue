@@ -152,7 +152,7 @@ import {getObj} from '@/common/js/getObj.js'
                     this.column6 = this.dataTeam[7]
                     this.column7 = this.dataTeam[9]
                     this.column8 = this.dataTeam[11]
-                    console.log(this.dataTeam)
+                    // console.log(this.dataTeam)
                 })
                 .catch(error=>{
                     alert(error)
