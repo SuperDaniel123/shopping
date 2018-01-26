@@ -66,8 +66,7 @@
                     <img class="title" :src="columnTitle[3].itemData[0].imageUrl" />
                     <ul class="layout5">
                         <li v-for="item in column8.itemData" :key="item.index">
-                            <spinner type="bubbles" class="loadding"></spinner>
-                            <x-img :src="item.imageUrl" @on-success="success" @on-error="error" class="ximg-demo" error-class="ximg-error" :offset="-100" container="#vux_view_box_body"/>
+                            <loader :src = "item.imageUrl + '@180w_180h'"></loader>
                             <p v-text="item.goodsName"></p>
                             <span><i class="fa fa-usd"></i>{{item.goodsPrice}}</span>
                         </li>
@@ -80,15 +79,15 @@
 
 <script>
 import iHeader from '@/components/header/i-header'
-import { Swiper, SwiperItem, XImg, Spinner } from 'vux'
+import { Swiper, SwiperItem } from 'vux'
 import {getObj} from '@/common/js/getObj.js'
+import loader from "@/components/imgLoad/loader"
     export default{
         components:{
             iHeader,
             Swiper, 
             SwiperItem,
-            XImg,
-            Spinner
+            loader
         },
         data(){
             return{

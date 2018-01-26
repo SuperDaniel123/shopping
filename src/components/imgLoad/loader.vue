@@ -1,6 +1,6 @@
 <template>
   <div class="loader">
-      <spinner type="bubbles" class="loadding"></spinner>
+      <spinner type="lines" class="loadding"></spinner>
       <x-img :src="this.src"  @on-success="success" @on-error="error" class="ximg" error-class="ximg-error" :offset="-100" container="#vux_view_box_body"></x-img>
   </div>
 </template>

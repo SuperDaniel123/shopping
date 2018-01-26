@@ -2,14 +2,12 @@ import Vue from 'vue'
 import axios from "axios"
 import qs from "qs"
 axios.defaults.baseURL='/';
-axios.interceptors.response.use(
-    response => {
-        return Promise.resolve(response) 
-    },
-    error => {
-        return Promise.reject(response);
-    }
-)
+
+axios.defaults.retry = 4;
+axios.defaults.retryDelay = 1000;
+axios.defaults.shouldRetry = (error) => true;
+
+
 let api = function(url,type,options){
 
     /*  url       请求地址
@@ -23,53 +21,69 @@ let api = function(url,type,options){
         timeout: 5000,
         headers: {'Content-Type': 'application/x-www-form-urlencoded'}
     });
+
+    instance.interceptors.response.use(undefined, (err) => {
+        var config = err.config;
+        // 判断是否配置了重试
+        if(!config || !config.retry) return Promise.reject(err);
+    
+        if(!config.shouldRetry || typeof config.shouldRetry != 'function') {
+           return Promise.reject(err);
+        }
+    
+        //判断是否满足重试条件
+        if(!config.shouldRetry(err)) {
+          return Promise.reject(err);
+        }
+    
+        // 设置重置次数，默认为0
+        config.__retryCount = config.__retryCount || 0;
+    
+        // 判断是否超过了重试次数
+        if(config.__retryCount >= config.retry) {
+            return Promise.reject(err);
+        }
+    
+        //重试次数自增
+        config.__retryCount += 1;
+    
+        //延时处理
+        var backoff = new Promise(function(resolve) {
+            setTimeout(function() {
+                resolve();
+            }, config.retryDelay || 1);
+        });
+    
+        //重新发起axios请求
+        return backoff.then(function() {
+            return instance(config);
+        });
+    });
+    
+
     return new Promise((resolve,reject)=>{
         if(type === 'POST' || type === 'post'){
             instance.post(url,qs.stringify(opt))
-            // axios({
-            //     method: type,
-            //     url:url,
-            //     data: (type === 'POST' || type === 'post') ? qs.stringify(opt) : {},
-            //     responseType: 'json',
-            //     headers: {
-            //         'Accept': 'application/json',
-            //         'Content-Type': 'application/x-www-form-urlencoded'
-            //     }
-            // })
+
             .then(response => {
                 resolve(response)
             })
             .catch(error => {
                 alert("loading failed")
-                location.replace(document.referrer)
             })
         }else if(type === 'GET' || type === 'get'){
-            
             instance.get(url,qs.stringify(opt))
-            // axios({
-            //     method: type,
-            //     url:url,
-            //     params: (type === 'GET' || type === 'get') ? opt : {},
-            //     responseType: 'json',
-            //     headers: {
-            //         'Accept': 'application/json',
-            //         'Content-Type': 'application/json'
-            //     }
-            // })
-           
+
             .then(response => {
                 resolve(response)
             })
             .catch(error => {
                 alert("loading failed")
-                // document.location.reload()
-                // return api(url,type,options)
             })
         }
         
     })
 }
-
 
 
 Vue.prototype.$ajax = api;

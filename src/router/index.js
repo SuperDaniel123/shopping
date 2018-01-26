@@ -11,6 +11,7 @@ import login from '@/base/login/login'
 import store from '@/base/store/store'
 import storeIndex from '@/base/store/storeIndex'
 import info from '@/base/store/store_info'
+import search from '@/base/search/search'
 
 Vue.use(Router)
 
@@ -85,6 +86,11 @@ export default new Router({
               component:info
             }        
           ]
+        },
+        {
+          path:'/search',
+          name:'search',
+          component:search,
         }
 
 

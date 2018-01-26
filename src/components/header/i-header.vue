@@ -1,7 +1,7 @@
 <template>
   <div >
       <div class="header">
-          <input type="text" class="search" placeholder="search" />
+          <router-link type="text" class="search" to="/search" >search</router-link>
           <div class="icon">
             <i class="fa fa-commenting-o"></i>
             <i class="fa fa-globe"></i>
@@ -37,6 +37,7 @@ export default{
         width:70%;
         line-height: 2.2rem;
         height: 2.2rem;
+        background: #fff;
         color:#888;
         font-family: Arial, Helvetica, sans-serif;
         position: absolute;

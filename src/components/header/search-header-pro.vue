@@ -36,7 +36,7 @@ export default{
             }
         },
         getBack(){
-            window.history.go(-1)
+            this.$router.goBack()
         }
         
     }

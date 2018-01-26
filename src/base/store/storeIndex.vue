@@ -149,7 +149,7 @@ export default {
                 console.log(error)
             })
         },
-                head_success (src, ele) {
+        head_success (src, ele) {
             const span = ele.parentNode.querySelector('.errImg')
             ele.parentNode.removeChild(span)
         },
