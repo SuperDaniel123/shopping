@@ -136,6 +136,7 @@ import loader from "@/components/imgLoad/loader"
                 this.$ajax('/','get',{}).then(res=>{
                     if(res.status != 200){
                         console.log('error')
+                        return;
                     }
                     this.dataTeam = res.data.datas.itemList;
                     getObj(this.dataTeam,'itemData')
