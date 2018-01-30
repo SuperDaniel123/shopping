@@ -12,6 +12,7 @@ import store from '@/base/store/store'
 import storeIndex from '@/base/store/storeIndex'
 import info from '@/base/store/store_info'
 import search from '@/base/search/search'
+import productList from '@/base/productList/productList'
 
 Vue.use(Router)
 
@@ -91,6 +92,11 @@ export default new Router({
           path:'/search',
           name:'search',
           component:search,
+        },
+        {
+          path:'/productList',
+          name:'productList',
+          component:productList
         }
 
 

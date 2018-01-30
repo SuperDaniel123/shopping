@@ -37,8 +37,6 @@ export default {
             // arr:[],
             //储存历史数组
             hisList:[]
-
-            
         }
     },
     methods:{
@@ -56,8 +54,14 @@ export default {
                 }
             }
             if(flag){
+                if(!this.keyword){
+                    alert("Please enter keywords")
+                    return;
+                }
                 this.hisList.push(this.keyword)
                 localStorage.setItem('hisList',JSON.stringify(this.hisList))
+                localStorage.setItem('keyword',this.keyword)
+                this.$router.push({path:'/productList'})
             }
             
         },

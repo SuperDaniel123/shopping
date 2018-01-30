@@ -15,7 +15,7 @@ function pageHeight(dom){
     content.style.minHeight = inHeight + 'px'
 }
 
-export {  //暴露出去
+export {  
     getObj,
     pageHeight
 }

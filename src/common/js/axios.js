@@ -72,7 +72,12 @@ let api = function(url,type,options){
                 alert("loading failed")
             })
         }else if(type === 'GET' || type === 'get'){
-            instance.get(url,qs.stringify(opt))
+            let getOpt = qs.stringify(opt);
+            if(getOpt){
+                getOpt = '?'+ getOpt
+            }
+
+            instance.get(url + getOpt)
 
             .then(response => {
                 resolve(response)

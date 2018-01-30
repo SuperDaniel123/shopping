@@ -2,7 +2,7 @@
   <div >
       <div class="header">
           <i class="fa fa-angle-left fa-2x black" @click="getBack"></i>
-          <input type="text" class="search" placeholder="search" />
+          <router-link type="text" class="search" to="/search" >search</router-link>
           <i class="fa fa-ellipsis-h" @click="getShow"></i>
           <ul class="moreList" v-if="more">
                 <li><i class="fa fa-home fa-lg"></i><span>Home</span></li>
@@ -66,6 +66,7 @@ export default{
         width:80%;
         line-height: 2.2rem;
         height: 2.2rem;
+        background: #fff;
         color:#888;
         font-family: Arial, Helvetica, sans-serif;
         position: absolute;
