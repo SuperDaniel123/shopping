@@ -3,16 +3,16 @@
       <div class="header">
         <i class="fa fa-angle-left fa-2x black" @click="getBack"></i>
         <input type="text" v-model="keyword" class="search_inp" placeholder="search keyword" />
-        <span class="go" @click="goneList(keyword)">Enter</span>
+        <span class="go" @click="goneList(keyword,0)">Enter</span>
       </div>
       <div class="center">
           <ul class="recList">
-              <li v-for="(item,index) in recList.keywordList" :key="index" v-text="item"></li>
+              <li v-for="(item,index) in recList.keywordList" :key="index" v-text="item" @click="goneList(item,1)"></li>
           </ul>
           <div class="history">
               <h3>Search history</h3>
               <ul class="hisList">
-                  <li v-for="(item,index) in hisList" :key="index" >{{item}}<i class="fa fa-times" @click="removeItem(item)"></i></li>
+                  <li v-for="(item,index) in hisList" :key="index" ><span style="display:inline-block" v-text="item" @click="goneList(item,1)"></span><i class="fa fa-times" @click="removeItem(item)"></i></li>
               </ul>
               <div v-if="this.hisList.length == 0" class="clear" style="color:#666">no record</div>
               <div v-if="this.hisList.length != 0" @click="removeAll" class="clear">Clear Search History</div>
@@ -45,24 +45,22 @@ export default {
             this.$router.goBack()
         },
         //跳转到列表页
-        goneList(key){
+        goneList(key,mode){
             var flag = true;
-            for(let i = 0; i <this.hisList.length; i++){
-                if(this.hisList[i] == key){
-                    flag = false;
-                    continue;
-                }
+            
+            if(this.hisList.includes(key)){
+                flag = false;
             }
             if(flag){
-                if(!this.keyword){
+                if(!key && mode == 0){
                     alert("Please enter keywords")
                     return;
                 }
-                this.hisList.push(this.keyword)
+                this.hisList.push(key)
                 localStorage.setItem('hisList',JSON.stringify(this.hisList))
-                localStorage.setItem('keyword',this.keyword)
-                this.$router.push({path:'/productList'})
+                localStorage.setItem('keyword',key)
             }
+            this.$router.push({path:'/productList'})
             
         },
         //推荐列表

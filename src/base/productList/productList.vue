@@ -3,7 +3,7 @@
       <search-header-pro></search-header-pro>
       <div class="screenTeam">
             <!--如果需要值改变同时显示，加v-model="value"-->
-            <popup-picker :title="BestTit" class="ddd" :data="BestList" @on-show="onShow" @on-hide="onHide" @on-change="onChange" ></popup-picker>
+            <popup-picker :title="BestTit" class="ddd" :data="BestList" @on-show="onShow" @on-change="onChange" ></popup-picker>
             <span>Other</span>
             <span>Filter</span>
             <div class="style" @click="getStyle(style)">
@@ -17,8 +17,8 @@
                 <span>No more data</span>
             </div>
             <ul v-if="noMore == 1" :class="style == 0 ? 'cosList' : 'rowList'" >
-                <li v-for="(item,index) in goodsList" :key="index">
-                    <loader class="pic" :src="item.imageSrc + '@180w_180h'"></loader>
+                <li v-for="(item,index) in this.goodsList" :key="index">
+                    <loader class="pic" :src="item.imageSrc" ></loader>
                     <!-- <img class="pic" :src="item.imageSrc" /> -->
                     <div class="text">
                         <p v-text="item.goodsName"></p>
@@ -26,7 +26,6 @@
                         <span>Orders:0</span>
                     </div>
                 </li>
-                
             </ul>
           
           
@@ -46,43 +45,71 @@ export default {
       pageHeight,
       loader
   },
-  created(){
-      this.getAjax()
-  },
   mounted () {
       this.textStyle(),
+      this.getAjax(),
       pageHeight('.content')
   },
   data(){
       return {
+          fromData:{
+              keyword:localStorage.getItem('keyword'),
+              client:'wap',
+              page:'1',
+              sort:''
+          },
+          //key值
+          key:localStorage.getItem('keyword'),
           goodsList:[],
           BestTit:'Best Match ▼',
           BestList: [['Best Match','Price : High to Low','Price : Low to High','Seller\'s Ratings']],
           //切换列表样式
           style:1,
           //没有产品
-          noMore:1
+          noMore:1,
+          
           
       }
   },
+
   methods: {
     //下拉菜单逻辑
     onShow () {
         this.textStyle()
     },
-    onHide (type) {
-      console.log('on hide', type)
-    },
+    // onHide (type) {
+    //   console.log('on hide', type)
+    // },
     onChange (val) {
-      console.log('val change', val)
+        let d = val[0];
+        switch(d){
+            case 'Best Match' : {
+                this.fromData.sort = '';
+                this.getAjax()
+                break;
+            }
+            case 'Price : High to Low' : {
+                this.fromData.sort = 'price_desc';
+                this.getAjax()
+                break;
+            }
+            case 'Price : Low to High' : {
+                this.fromData.sort = 'price_asc';
+                this.getAjax()
+                break;
+            }
+            case 'Seller\'s Ratings' : {
+                this.fromData.sort = 'comment_desc';
+                this.getAjax()
+                break;
+            }
+        }
     },
     //下拉菜单逻辑结束
 
     //请求列表
     getAjax(){
-        let key = localStorage.getItem('keyword');
-        console.log(key)
-        this.$ajax('/search','get',{keyword:key,client:'wap'}).then(res =>{
+        this.$ajax('/search','get',this.fromData).then(res =>{
             if(res.status != 200){
                 console.log('error')
                 return;
@@ -92,7 +119,7 @@ export default {
             }
             this.noMore = 1;
             this.goodsList = res.data.datas.goodsList;
-            console.log(this.goodsList)
+            // console.log(this.goodsList)
         }).catch(err =>{
             console.log(err)
         })
@@ -116,7 +143,7 @@ export default {
         }
     }
     
-  }
+  },
 }
 </script>
 
